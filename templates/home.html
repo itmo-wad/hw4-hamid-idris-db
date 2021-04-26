@@ -1,0 +1,32 @@
+
+{% block body %}
+   <head>
+      <meta charset="UTF-8">
+      <title> Home page </title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">					
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+     <div align="center">
+          <h1 class="p-3 mb-2 bg-dark text-white">WELCOME TO HOME WORK 3</h1>
+          <div class="jumbotron">
+            
+            <h1 class="display-4">Hello, {{ session['username'] }}!</h1>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success"> {{ message|capitalize }} </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <p class="lead">This is a simple authentication page with a log out button, if you want to render some images <a href="http://localhost:5000/static/sunset.jpg">click here</a></p>
+            <hr class="my-4">
+            <p>If you want to log out you can click at the button below</p>
+            <p class="lead">
+              <a class="btn btn-dark btn-lg" href="{{ url_for('logout') }}" role="button">Log out</a>
+            </p>
+          </div>
+      </div>
+    {% endblock %}
+    
+
+	

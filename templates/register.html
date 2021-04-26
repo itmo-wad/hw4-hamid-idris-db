@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page </title>
+</head>
+<body>
+  <div class="login-page">
+    <h2 class="p-3 mb-2 bg-dark text-white">Register</h2>
+    {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger" role="alert"> {{ message|capitalize }} </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+    <div class="form" >
+      <form class="login-form" method= "POST">
+        <input type="text" name="username" placeholder="username"/>
+        <input type="password" name="password" placeholder="password"/>
+        <button>Create Account</button>
+        <p class="message">Already registered? <a href="{{ url_for('login') }}">Sign In</a></p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
