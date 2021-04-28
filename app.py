@@ -9,33 +9,41 @@ mongo = PyMongo(app)
 
 app.secret_key = 'homework 4'
 
-
+# login route
 @app.route('/', methods=['GET','POST'])
 def login():
-    users = mongo.db.mycol1
-    usr= request.form['username']
-    finduser= users.find_one({'username' : usr})
-        
-    if finduser:
-       if request.form['password'] == finduser['password']:
-            flash('You have logged in successfully')
-            return redirect(url_for('home'))
-       else:
-            flash('Invalid username or password')
+    if request.method == 'POST':
+        users = mongo.db.mycol1
+        login_user = users.find_one({'username' : request.form['username']})
+
+        if login_user:
+            if request.form['password'] == login_user['password']:
+                session['username'] =request.form['username']
+                flash('You have logged in successfully')
+                return redirect(url_for('home'))
+            
+        flash('Validation failed')
+        return render_template('login.html')
+            
               
     return render_template('login.html')
 
+
+# home route
 @app.route('/home')
 def home():
     if 'username' in session:
         return render_template('home.html', username=session['username'])
     return redirect(url_for('login'))
-  
+
+# end session when current user clicks logout button  
 @app.route('/logout')
 def logout():
     session.pop('username',None)
     return redirect(url_for('login'))
 
+
+# registration page route
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
