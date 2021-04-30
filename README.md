@@ -3,7 +3,7 @@
 This one is similar to home work 3 with a registration account option 
 
 ### default user
-**username:** is admin \
+**username:** admin \
 **password:** admin
 
 you can create a new user by clicking to the link *create an account*
